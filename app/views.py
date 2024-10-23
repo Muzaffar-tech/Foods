@@ -1,5 +1,4 @@
 from rest_framework.generics import GenericAPIView
-from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework import status, mixins
 from .models import Food, FoodType, Comment
