@@ -1,11 +1,10 @@
 from rest_framework import generics, filters
-from rest_framework.response import Response
-from rest_framework import status, mixins
 from .models import Food, FoodType, Comment
 from .serializers import FoodSerializer, FoodTypeSerializer, CommentSerializer
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.viewsets import ModelViewSet
 
-class FoodTypeListApiView(generics.ListCreateAPIView):
+class FoodTypeApiViewSet(ModelViewSet):
     serializer_class = FoodTypeSerializer
     queryset = FoodType.objects.all()
     permission_classes = [IsAuthenticated]
@@ -14,7 +13,7 @@ class FoodTypeListApiView(generics.ListCreateAPIView):
     search_fields = ['name']
 
 
-class FoodListApiView(generics.ListCreateAPIView):
+class FoodApiViewSet(ModelViewSet):
     serializer_class = FoodSerializer
     queryset = Food.objects.all()
     permission_classes = [IsAuthenticated]
@@ -31,9 +30,7 @@ class FoodListApiView(generics.ListCreateAPIView):
 
 
 
-
-
-class CommentListApiView(generics.ListCreateAPIView):
+class CommentApiViewSet(ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
     permission_classes = [IsAuthenticated]
@@ -41,18 +38,3 @@ class CommentListApiView(generics.ListCreateAPIView):
     ordering_fields = ['pk', 'name']
     search_fields = ['text', 'food', 'author']
 
-
-class CommentDetailApiView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Comment.objects.all()
-    serializer_class = CommentSerializer
-    permission_classes = [IsAuthenticated]
-
-class FoodTypeDetailApiView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = FoodType.objects.all()
-    serializer_class = FoodTypeSerializer
-    permission_classes = [IsAuthenticated]
-
-class FoodDetailApiView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Food.objects.all()
-    serializer_class = FoodSerializer
-    permission_classes = [IsAuthenticated]
