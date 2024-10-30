@@ -33,6 +33,10 @@ schema_view = get_schema_view(
    ),
    public=True,
    permission_classes=[permissions.AllowAny,],
+    patterns=[
+        path('api/v1/', include('app.urls', namespace='v1')),
+        path('api/v2/', include('app.urls', namespace='v2')),
+    ]
 )
 
 
