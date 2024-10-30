@@ -3,6 +3,7 @@ from .models import Food, FoodType, Comment
 from .serializers import FoodSerializer, FoodTypeSerializer, CommentSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
+from .throttles import FoodAnonThrottle, FoodUserThrottle, FoodTypeUserThrottle, FoodTypeAnonThrottle, CommentUserThrottle, CommentAnonThrottle
 
 class FoodTypeApiViewSet(ModelViewSet):
     serializer_class = FoodTypeSerializer
@@ -11,6 +12,7 @@ class FoodTypeApiViewSet(ModelViewSet):
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
     ordering_fields = ['pk', 'name']
     search_fields = ['name']
+    throttle_classes = [FoodTypeUserThrottle, FoodTypeAnonThrottle]
 
 
 class FoodApiViewSet(ModelViewSet):
@@ -20,6 +22,7 @@ class FoodApiViewSet(ModelViewSet):
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
     ordering_fields = ['pk', 'name']
     search_fields = ['name', 'composition']
+    throttle_classes = [FoodUserThrottle, FoodAnonThrottle]
 
     def get_queryset(self):
         if self.kwargs.get("food_type_id", False):
@@ -37,4 +40,5 @@ class CommentApiViewSet(ModelViewSet):
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
     ordering_fields = ['pk', 'name']
     search_fields = ['text', 'food', 'author']
+    throttle_classes = [CommentUserThrottle, CommentAnonThrottle]
 
