@@ -16,7 +16,7 @@ class FoodTypeApiViewSet(ModelViewSet):
     ordering_fields = ['pk', 'name']
     search_fields = ['name']
     throttle_classes = [FoodTypeUserThrottle, FoodTypeAnonThrottle]
-    # pagination_class = FoodTypePagination
+    pagination_class = FoodTypePagination
 
 
 class FoodApiViewSet(ModelViewSet):
@@ -27,7 +27,7 @@ class FoodApiViewSet(ModelViewSet):
     ordering_fields = ['pk', 'name']
     search_fields = ['name', 'composition']
     throttle_classes = [FoodUserThrottle, FoodAnonThrottle]
-    # pagination_class = FoodPagination
+    pagination_class = FoodPagination
 
     def get_queryset(self):
         if self.kwargs.get("food_type_id", False):
@@ -46,5 +46,5 @@ class CommentApiViewSet(ModelViewSet):
     ordering_fields = ['pk', 'name']
     search_fields = ['text', 'food', 'author']
     throttle_classes = [CommentUserThrottle, CommentAnonThrottle]
-    # pagination_class = CommentPagination
+    pagination_class = CommentPagination
 
