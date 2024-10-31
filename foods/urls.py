@@ -36,6 +36,7 @@ schema_view = get_schema_view(
     patterns=[
         path('api/v1/', include('app.urls', namespace='v1')),
         path('api/v2/', include('app.urls', namespace='v2')),
+        path('api/admin/', admin.site.urls, name='admin'),
     ]
 )
 
