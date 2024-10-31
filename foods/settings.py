@@ -149,7 +149,7 @@ REST_FRAMEWORK = {
         'comment_user_list':'150/minute',
     },
 
-    'DEFAULT_PAGINATION_CLASS': 'foods.apps.core.pagination.LinkHeaderPagination',
+    'DEFAULT_PAGINATION_CLASS': 'foods.apps.pagination.CustomPagination',
     'PAGE_SIZE': 100
 
 }
